@@ -1,9 +1,6 @@
 ﻿using Dal;
 using DomainModelBurger;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace WebBurger.Repository
 {
@@ -16,7 +13,7 @@ namespace WebBurger.Repository
 			this.context = context;
 		}
 
-		public IQueryable<Beverage> GetSides()
+		public IQueryable<Beverage> GetBeverages()
 		{
 			return context.Beverages;
 		}
