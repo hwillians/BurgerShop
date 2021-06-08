@@ -1,5 +1,6 @@
 ﻿using Dal;
 using DomainModelBurger;
+using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -46,12 +47,21 @@ namespace WebBurger.Repository
 
 		public async Task<Menu> GetMenuAsync(int id)
 		{
-			return await this.context.Menus.FindAsync(id);
+			return await context.Menus
+				.Include(m => m.Burger)
+				.Include(m => m.Beverage)
+				.Include(m => m.Side)
+				.Include(m => m.Dessert)
+				.SingleAsync(m => m.ProductId == id);
 		}
 
 		public IQueryable<Menu> GetMenus()
 		{
-			return this.context.Menus;
+			return context.Menus
+				.Include(m => m.Burger)
+				.Include(m => m.Beverage)
+				.Include(m => m.Side)
+				.Include(m => m.Dessert);
 		}
 	}
 }

@@ -6,15 +6,15 @@ namespace DomainModelBurger
 	[Table("Menu")]
 	public class Menu : Product
 	{
-		[Required]
-		public Beverage Beverage { get; set; }
+		[Required(ErrorMessage = "Beverage is required")]
+		public virtual Beverage Beverage { get; set; }
 
-		[Required]
-		public Side Side { get; set; }
+		[Required(ErrorMessage = "Side is required")]
+		public virtual Side Side { get; set; }
 
-		public Dessert Dessert { get; set; }
+		public virtual Dessert Dessert { get; set; }
 
-		[Required]
-		public Burger Burger { get; set; }
+		[Required(ErrorMessage = "Burger is required")]
+		public virtual Burger Burger { get; set; }
 	}
 }

@@ -12,6 +12,7 @@
     <div class="col-md-4">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="ProductId" class="form-control" />
             <div class="form-group">
                 <label asp-for="Weight" class="control-label"></label>
                 <input asp-for="Weight" class="form-control" />
@@ -21,11 +22,6 @@
                 <label asp-for="BeefWeight" class="control-label"></label>
                 <input asp-for="BeefWeight" class="form-control" />
                 <span asp-validation-for="BeefWeight" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ProductId" class="control-label"></label>
-                <input asp-for="ProductId" class="form-control" />
-                <span asp-validation-for="ProductId" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Name" class="control-label"></label>
@@ -57,4 +53,3 @@
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
-
