@@ -9,9 +9,9 @@ namespace WebBurger.Repository
 	{
 		private BurgerContext context;
 
-		public RepositoryBurger(BurgerContext context)
+		public RepositoryBurger(BurgerContext burgerContext)
 		{
-			this.context = context;
+			context = burgerContext;
 		}
 
 		public Burger CreateBurger(Burger burger)

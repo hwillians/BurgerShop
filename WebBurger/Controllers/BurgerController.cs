@@ -32,7 +32,6 @@ namespace WebBurger.Controllers
 			if (burger == null)
 				return NotFound();
 
-			
 			return View(burger);
 		}
 
@@ -84,14 +83,12 @@ namespace WebBurger.Controllers
 			if (burger == null)
 				return NotFound();
 
-
 			return View(burger);
 		}
 
 		// POST: BurgerController/Delete/5
-		[HttpPost]
+		[HttpPost, ActionName("Delete")]
 		[ValidateAntiForgeryToken]
-		[ActionName("Delete")]
 		public async Task<IActionResult> DeleteAsync(int id)
 		{
 			await repository.DeleteburgerAsync(id);

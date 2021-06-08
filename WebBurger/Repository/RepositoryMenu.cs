@@ -7,31 +7,46 @@ namespace WebBurger.Repository
 {
 	public class RepositoryMenu : IRepositoryMenu
 	{
-		private BurgerContext context;
+		private readonly BurgerContext context;
 
-		public RepositoryMenu(BurgerContext context)
+		public RepositoryMenu(BurgerContext burgerContext)
 		{
-			this.context = context;
+			context = burgerContext;
 		}
 
-		public Task<Menu> CreateMenuAsync(Menu menu)
+		public async Task<Menu> CreateMenuAsync(Menu menu)
 		{
-			throw new System.NotImplementedException();
+			context.Menus.Add(menu);
+			await context.SaveChangesAsync();
+			return menu;
 		}
 
-		public Task DeleteMenuAsync(int id)
+		public async Task DeleteMenuAsync(int id)
 		{
-			throw new System.NotImplementedException();
+			var menu = await context.Menus.FindAsync(id);
+			context.Menus.Remove(menu);
+			context.SaveChanges();
 		}
 
-		public Task<Menu> EditMenuAsync(int id, Menu menu)
+		public async Task<Menu> EditMenuAsync(int id, Menu editedMenu)
 		{
-			throw new System.NotImplementedException();
+			var menu = context.Menus.Find(id);
+			menu.Name = editedMenu.Name;
+			menu.Price = editedMenu.Price;
+			menu.Description = editedMenu.Description;
+			menu.StockPiled = editedMenu.StockPiled;
+			menu.Burger = editedMenu.Burger;
+			menu.Dessert = editedMenu.Dessert;
+			menu.Side = editedMenu.Side;
+			menu.Beverage = editedMenu.Beverage;
+			await context.SaveChangesAsync();
+
+			return context.Menus.Find(id);
 		}
 
-		public Task<Menu> GetMenuAsync(int id)
+		public async Task<Menu> GetMenuAsync(int id)
 		{
-			throw new System.NotImplementedException();
+			return await this.context.Menus.FindAsync(id);
 		}
 
 		public IQueryable<Menu> GetMenus()
