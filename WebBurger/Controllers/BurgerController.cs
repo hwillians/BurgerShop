@@ -32,6 +32,7 @@ namespace WebBurger.Controllers
 			if (burger == null)
 				return NotFound();
 
+			
 			return View(burger);
 		}
 
@@ -74,9 +75,17 @@ namespace WebBurger.Controllers
 		}
 
 		// GET: BurgerController/Delete/5
-		public IActionResult Delete(int id)
+		public async Task<IActionResult> Delete(int? id)
 		{
-			return View();
+			if (id == null)
+				return BadRequest();
+
+			var burger = await repository.GetBurger(id.Value);
+			if (burger == null)
+				return NotFound();
+
+
+			return View(burger);
 		}
 
 		// POST: BurgerController/Delete/5
