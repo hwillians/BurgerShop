@@ -1,19 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DomainModelBurger
 {
-    [Table("Side")]
-    public class Side : Product
-    {
-        [Required]
-        public int Weight { get; set; }
-        [Required]
-        public int SaltWeight { get; set; }
-    }
+	[Table("Side")]
+	public class Side : Product
+	{
+		[Required]
+		public int Weight { get; set; }
+
+		[Required]
+		[DisplayName("Salt weight")]
+		public int SaltWeight { get; set; }
+	}
 }
