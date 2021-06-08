@@ -27,6 +27,8 @@ namespace WebBurger
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddScoped<IRepositoryBurger, RepositoryBurger>();
+            services.AddScoped<IRepositoryBeverage, RepositoryBeverage>();
+
 
             //services.AddScoped<SchoolContext>();
 
