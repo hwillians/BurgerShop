@@ -1,6 +1,8 @@
 ﻿using DomainModelBurger;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
+using System.Threading.Tasks;
 using WebBurger.Repository;
 
 namespace WebBurger.Controllers
@@ -17,13 +19,22 @@ namespace WebBurger.Controllers
 		// GET: Beverage
 		public IActionResult Index()
 		{
-			return View(repository.GetBeverages());
+			var beverage = repository.GetBeverages().ToList();
+			return View(beverage);
 		}
 
 		// GET: Beverage/Details/5
-		public IActionResult Details(int id)
+		public IActionResult Details(int? id)
 		{
-			return View(repository.GetBeverage(id));
+			if (id == null)
+				return BadRequest();
+
+			var beverage = repository.GetBeverage(id.Value);
+			if (beverage == null)
+				return NotFound();
+
+
+			return View(beverage);
 		}
 
 		// GET: Beverage/Create
@@ -47,9 +58,17 @@ namespace WebBurger.Controllers
 		}
 
 		// GET: Beverage/Edit/5
-		public IActionResult Edit(int id)
+		public IActionResult Edit(int? id)
 		{
-			return View();
+			if (id == null)
+				return BadRequest();
+
+			var beverage =  repository.GetBeverage(id.Value);
+			if (beverage == null)
+				return NotFound();
+
+
+			return View(beverage);
 		}
 
 		// POST: Beverage/Edit/5

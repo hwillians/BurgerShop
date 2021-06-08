@@ -23,12 +23,12 @@ namespace WebBurger.Controllers
 		}
 
 		// GET: BurgerController/Details/5
-		public IActionResult Details(int? id)
+		public async Task<IActionResult> Details(int? id)
 		{
 			if (id == null)
 				return BadRequest();
 
-			var burger = repository.GetBurger(id.Value);
+			var burger = await repository.GetBurger(id.Value);
 			if (burger == null)
 				return NotFound();
 
@@ -56,9 +56,17 @@ namespace WebBurger.Controllers
 		}
 
 		// GET: BurgerController/Edit/5
-		public IActionResult Edit(int id)
+		public async Task<IActionResult> Edit(int? id)
 		{
-			return View();
+			if (id == null)
+				return BadRequest();
+
+			var burger = await repository.GetBurger(id.Value);
+			if (burger == null)
+				return NotFound();
+
+
+			return View(burger);
 		}
 
 		// POST: BurgerController/Edit/5
