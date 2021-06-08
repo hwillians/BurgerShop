@@ -24,6 +24,7 @@ namespace WebBurger.Repository
 		{
 			var beverage = context.Beverages.Find(id);
 			context.Beverages.Remove(beverage);
+			context.SaveChanges();
 		}
 
 		public Beverage EditBeverage(int id, Beverage editedBeverage)
@@ -37,6 +38,11 @@ namespace WebBurger.Repository
 			beverage.IsCarbonated = editedBeverage.IsCarbonated;
 			context.SaveChanges();
 
+			return context.Beverages.Find(id);
+		}
+
+		public Beverage GetBeverage(int id)
+		{
 			return context.Beverages.Find(id);
 		}
 
