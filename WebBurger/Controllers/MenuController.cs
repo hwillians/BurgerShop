@@ -81,7 +81,7 @@ namespace WebBurger.Controllers
 		// For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public async Task<IActionResult> Edit(int id, [Bind("ProductId,Name,Price,Description,StockPiled")] Menu menu)
+		public async Task<IActionResult> Edit(int id, Menu menu)
 		{
 			if (id != menu.ProductId)
 			{

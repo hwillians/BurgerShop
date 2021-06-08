@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
-using System.Threading.Tasks;
 using WebBurger.Repository;
 
 namespace WebBurger.Controllers
@@ -33,7 +32,6 @@ namespace WebBurger.Controllers
 			if (beverage == null)
 				return NotFound();
 
-
 			return View(beverage);
 		}
 
@@ -51,7 +49,7 @@ namespace WebBurger.Controllers
 			if (ModelState.IsValid)
 			{
 				var b = repository.CreateBeverage(beverage);
-				return RedirectToAction(nameof(Details), b.ProductId);
+				return RedirectToAction(nameof(Details), new { id = b.ProductId });
 			}
 
 			return View(beverage);
@@ -63,10 +61,9 @@ namespace WebBurger.Controllers
 			if (id == null)
 				return BadRequest();
 
-			var beverage =  repository.GetBeverage(id.Value);
+			var beverage = repository.GetBeverage(id.Value);
 			if (beverage == null)
 				return NotFound();
-
 
 			return View(beverage);
 		}
@@ -79,7 +76,7 @@ namespace WebBurger.Controllers
 			if (ModelState.IsValid)
 			{
 				var b = repository.EditBeverage(id, beverage);
-				return RedirectToAction(nameof(Details), b.ProductId);
+				return RedirectToAction(nameof(Details), new { id = b.ProductId });
 			}
 
 			return View(beverage);
@@ -97,7 +94,7 @@ namespace WebBurger.Controllers
 		public IActionResult Delete(int id, IFormCollection collection)
 		{
 			repository.DeleteBeverage(id);
-			return View();
+			return RedirectToAction(nameof(Index));
 		}
 	}
 }

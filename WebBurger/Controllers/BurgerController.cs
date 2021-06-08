@@ -49,7 +49,7 @@ namespace WebBurger.Controllers
 			if (ModelState.IsValid)
 			{
 				var b = await repository.CreateBurgerAsync(burger);
-				return RedirectToAction(nameof(Details), b.ProductId);
+				return RedirectToAction(nameof(Details), new { id = b.ProductId });
 			}
 			return View(burger);
 		}
@@ -64,7 +64,6 @@ namespace WebBurger.Controllers
 			if (burger == null)
 				return NotFound();
 
-
 			return View(burger);
 		}
 
@@ -76,7 +75,7 @@ namespace WebBurger.Controllers
 			if (ModelState.IsValid)
 			{
 				var b = await repository.EditBurgerAsync(id, burger);
-				return RedirectToAction(nameof(Details), b.ProductId);
+				return RedirectToAction(nameof(Details), new { id = b.ProductId });
 			}
 			return View(burger);
 		}
@@ -100,7 +99,7 @@ namespace WebBurger.Controllers
 		public async Task<IActionResult> DeleteAsync(int id)
 		{
 			await repository.DeleteburgerAsync(id);
-			return View();
+			return RedirectToAction(nameof(Index));
 		}
 	}
 }
