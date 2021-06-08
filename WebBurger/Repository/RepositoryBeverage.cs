@@ -26,15 +26,15 @@ namespace WebBurger.Repository
 			context.Beverages.Remove(beverage);
 		}
 
-		public Beverage EditBeverage(int id, Beverage Editedbeverage)
+		public Beverage EditBeverage(int id, Beverage editedBeverage)
 		{
 			var beverage = context.Beverages.Find(id);
-			beverage.Name = Editedbeverage.Name;
-			beverage.Price = Editedbeverage.Price;
-			beverage.Description = Editedbeverage.Description;
-			beverage.StockPiled = Editedbeverage.StockPiled;
-			beverage.Millimeter = Editedbeverage.Millimeter;
-			beverage.IsCarbonated = Editedbeverage.IsCarbonated;
+			beverage.Name = editedBeverage.Name;
+			beverage.Price = editedBeverage.Price;
+			beverage.Description = editedBeverage.Description;
+			beverage.StockPiled = editedBeverage.StockPiled;
+			beverage.Millimeter = editedBeverage.Millimeter;
+			beverage.IsCarbonated = editedBeverage.IsCarbonated;
 			context.SaveChanges();
 
 			return context.Beverages.Find(id);

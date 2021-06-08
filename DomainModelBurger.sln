@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31321.278
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DomainModelBurger", "DomainModelBurger\DomainModelBurger.csproj", "{F13EABD6-C72A-40E0-ACB7-EE11EEC86D5B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DomainModelBurger", "DomainModelBurger\DomainModelBurger.csproj", "{F13EABD6-C72A-40E0-ACB7-EE11EEC86D5B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dal", "Dal\Dal.csproj", "{AF13A318-CDB7-4A6C-B495-F359114854A9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dal", "Dal\Dal.csproj", "{AF13A318-CDB7-4A6C-B495-F359114854A9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleAppBurger", "ConsoleAppBurger\ConsoleAppBurger.csproj", "{273F8868-782F-4C73-9EE4-80D60B7AF439}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleAppBurger", "ConsoleAppBurger\ConsoleAppBurger.csproj", "{273F8868-782F-4C73-9EE4-80D60B7AF439}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebBurger", "WebBurger\WebBurger.csproj", "{22F4A28A-3264-4F06-9BA7-FE857DA380EE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebBurger", "WebBurger\WebBurger.csproj", "{22F4A28A-3264-4F06-9BA7-FE857DA380EE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommonAttribute", "CommonAttribute\CommonAttribute.csproj", "{14C6D629-70CD-469F-8990-AA2E46237E53}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{22F4A28A-3264-4F06-9BA7-FE857DA380EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{22F4A28A-3264-4F06-9BA7-FE857DA380EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{22F4A28A-3264-4F06-9BA7-FE857DA380EE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{14C6D629-70CD-469F-8990-AA2E46237E53}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{14C6D629-70CD-469F-8990-AA2E46237E53}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{14C6D629-70CD-469F-8990-AA2E46237E53}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{14C6D629-70CD-469F-8990-AA2E46237E53}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
