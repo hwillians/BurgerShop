@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleAppBurger", "Console
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebBurger", "WebBurger\WebBurger.csproj", "{22F4A28A-3264-4F06-9BA7-FE857DA380EE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommonAttribute", "CommonAttribute\CommonAttribute.csproj", "{14C6D629-70CD-469F-8990-AA2E46237E53}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CommonAttribute", "CommonAttribute\CommonAttribute.csproj", "{14C6D629-70CD-469F-8990-AA2E46237E53}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
