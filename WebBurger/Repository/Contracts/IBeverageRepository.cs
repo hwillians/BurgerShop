@@ -1,9 +1,9 @@
 ﻿using DomainModelBurger;
 using System.Linq;
 
-namespace WebBurger.Repository
+namespace WebBurger.Repository.Contracts
 {
-	public interface IRepositoryBeverage
+	public interface IBeverageRepository
 	{
 		public IQueryable<Beverage> GetBeverages();
 

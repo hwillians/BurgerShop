@@ -3,14 +3,15 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 using WebBurger.Repository;
+using WebBurger.Repository.Contracts;
 
 namespace WebBurger.Controllers
 {
 	public class MenuController : Controller
 	{
-		private readonly IRepositoryMenu repository;
+		private readonly IMenuRepository repository;
 
-		public MenuController(IRepositoryMenu repositoryMenu)
+		public MenuController(IMenuRepository repositoryMenu)
 		{
 			repository = repositoryMenu;
 		}

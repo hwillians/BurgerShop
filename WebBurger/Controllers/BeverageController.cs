@@ -3,14 +3,15 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 using WebBurger.Repository;
+using WebBurger.Repository.Contracts;
 
 namespace WebBurger.Controllers
 {
 	public class BeverageController : Controller
 	{
-		private readonly IRepositoryBeverage repository;
+		private readonly IBeverageRepository repository;
 
-		public BeverageController(IRepositoryBeverage repositoryBeverage)
+		public BeverageController(IBeverageRepository repositoryBeverage)
 		{
 			repository = repositoryBeverage;
 		}

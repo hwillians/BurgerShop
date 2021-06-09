@@ -2,9 +2,9 @@
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace WebBurger.Repository
+namespace WebBurger.Repository.Contracts
 {
-	public interface IRepositoryDessert
+	public interface IDessertRepository
 	{
 		public IQueryable<Dessert> GetDesserts();
 

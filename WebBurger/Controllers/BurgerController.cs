@@ -3,14 +3,15 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 using WebBurger.Repository;
+using WebBurger.Repository.Contracts;
 
 namespace WebBurger.Controllers
 {
 	public class BurgerController : Controller
 	{
-		private readonly IRepositoryBurger repository;
+		private readonly IBurgerRepository repository;
 
-		public BurgerController(IRepositoryBurger repositoryBurger)
+		public BurgerController(IBurgerRepository repositoryBurger)
 		{
 			repository = repositoryBurger;
 		}

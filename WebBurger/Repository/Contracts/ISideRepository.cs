@@ -2,9 +2,9 @@
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace WebSide.Repository
+namespace WebBurger.Repository.Contracts
 {
-	public interface IRepositorySide
+	public interface ISideRepository
 	{
 		public IQueryable<Side> GetSides();
 

@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using WebBurger.Binders;
 using WebBurger.Repository;
+using WebBurger.Repository.Contracts;
 using WebBurger.Services;
 
 namespace WebBurger
@@ -23,9 +24,11 @@ namespace WebBurger
 		// This method gets called by the runtime. Use this method to add services to the container.
 		public void ConfigureServices(IServiceCollection services)
 		{
-			services.AddScoped<IRepositoryBurger, RepositoryBurger>();
-			services.AddScoped<IRepositoryBeverage, RepositoryBeverage>();
-			services.AddScoped<IRepositoryMenu, RepositoryMenu>();
+			services.AddScoped<IBurgerRepository, BurgerRepository>();
+			services.AddScoped<IBeverageRepository, BeverageRepository>();
+			services.AddScoped<IMenuRepository, MenuRepository>();
+			services.AddScoped<IDessertRepository, DessertRepository>();
+			services.AddScoped<ISideRepository, SideRepository>();
 
 			services.AddTransient<MenuService>();
 
@@ -35,6 +38,10 @@ namespace WebBurger
 				options.UseSqlServer(Configuration.GetConnectionString("BurgerDb"))
 			);
 			services.AddControllersWithViews();
+			services.AddControllersWithViews(conf =>
+			{
+				conf.ModelBinderProviders[4] = new FloatingTypeModelBinderProvider();
+			});
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

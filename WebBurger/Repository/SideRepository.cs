@@ -2,15 +2,15 @@
 using DomainModelBurger;
 using System.Linq;
 using System.Threading.Tasks;
-using WebSide.Repository;
+using WebBurger.Repository.Contracts;
 
 namespace WebBurger.Repository
 {
-	public class RepositorySide : IRepositorySide
+	public class SideRepository : ISideRepository
 	{
 		private BurgerContext context;
 
-		public RepositorySide(BurgerContext context)
+		public SideRepository(BurgerContext context)
 		{
 			this.context = context;
 		}

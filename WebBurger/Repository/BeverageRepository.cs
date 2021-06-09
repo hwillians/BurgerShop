@@ -1,14 +1,15 @@
 ﻿using Dal;
 using DomainModelBurger;
 using System.Linq;
+using WebBurger.Repository.Contracts;
 
 namespace WebBurger.Repository
 {
-	public class RepositoryBeverage : IRepositoryBeverage
+	public class BeverageRepository : IBeverageRepository
 	{
 		private readonly BurgerContext context;
 
-		public RepositoryBeverage(BurgerContext contextBurger)
+		public BeverageRepository(BurgerContext contextBurger)
 		{
 			context = contextBurger;
 		}

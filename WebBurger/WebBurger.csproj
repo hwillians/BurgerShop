@@ -12,17 +12,29 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Include="Binders\DecimalModelBinder.cs" />
+    <Compile Include="Binders\DoubleModelBinder.cs" />
+    <Compile Include="Binders\FloatingTypeModelBinderProvider.cs" />
+    <Compile Include="Binders\FloatModelBinder.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.7" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.7">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
+    <PackageReference Include="System.Collections" Version="4.3.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Dal\Dal.csproj" />
     <ProjectReference Include="..\DomainModelBurger\DomainModelBurger.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Views\Shared\Components\" />
   </ItemGroup>
 
 </Project>

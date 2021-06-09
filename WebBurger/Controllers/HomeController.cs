@@ -3,6 +3,7 @@ using Microsoft.Extensions.Logging;
 using System.Diagnostics;
 using WebBurger.Models;
 using WebBurger.Repository;
+using WebBurger.Repository.Contracts;
 
 namespace WebBurger.Controllers
 {
@@ -10,7 +11,7 @@ namespace WebBurger.Controllers
 	{
 		private readonly ILogger<HomeController> _logger;
 
-		public HomeController(ILogger<HomeController> logger, IRepositoryBurger repositoryBurger)
+		public HomeController(ILogger<HomeController> logger, IBurgerRepository repositoryBurger)
 		{
 			_logger = logger;
 			var test = repositoryBurger.GetBurgers();

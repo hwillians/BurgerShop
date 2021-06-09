@@ -3,14 +3,15 @@ using DomainModelBurger;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading.Tasks;
+using WebBurger.Repository.Contracts;
 
 namespace WebBurger.Repository
 {
-	public class RepositoryMenu : IRepositoryMenu
+	public class MenuRepository : IMenuRepository
 	{
 		private readonly BurgerContext context;
 
-		public RepositoryMenu(BurgerContext burgerContext)
+		public MenuRepository(BurgerContext burgerContext)
 		{
 			context = burgerContext;
 		}
