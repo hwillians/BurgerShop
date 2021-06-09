@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
-using WebBurger.Repository;
 using WebBurger.Repository.Contracts;
 
 namespace WebBurger.Controllers
@@ -10,10 +9,22 @@ namespace WebBurger.Controllers
 	public class MenuController : Controller
 	{
 		private readonly IMenuRepository repository;
+		private readonly IBurgerRepository burgerRepository;
+		private readonly IBeverageRepository beverageRepository;
+		private readonly IDessertRepository dessertRepository;
+		private readonly ISideRepository sideRepository;
 
-		public MenuController(IMenuRepository repositoryMenu)
+		public MenuController(IMenuRepository repositoryMenu,
+			IBurgerRepository burgerRepository,
+			IBeverageRepository beverageRepository,
+			IDessertRepository dessertRepository,
+			ISideRepository sideRepository)
 		{
 			repository = repositoryMenu;
+			this.burgerRepository = burgerRepository;
+			this.beverageRepository = beverageRepository;
+			this.dessertRepository = dessertRepository;
+			this.sideRepository = sideRepository;
 		}
 
 		// GET: Menu
@@ -50,13 +61,19 @@ namespace WebBurger.Controllers
 		// For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public async Task<IActionResult> Create([Bind("ProductId,Name,Price,Description,StockPiled")] Menu menu)
+		public async Task<IActionResult> Create([Bind("Name,Price,Description,StockPiled,Burger")] Menu menu)
 		{
+			ViewData.Model = menu;
 			if (ModelState.IsValid)
 			{
+				menu.Beverage = beverageRepository.GetBeverage(menu.Beverage.ProductId);
+				menu.Side = await sideRepository.GetSideAsync(menu.Side.ProductId);
+				menu.Dessert = await dessertRepository.GetDessertAsync(menu.Dessert.ProductId);
+				menu.Burger = await burgerRepository.GetBurger(menu.Burger.ProductId);
+
 				var m = await repository.CreateMenuAsync(menu);
 
-				return RedirectToAction(nameof(Details), m.ProductId);
+				return RedirectToAction(nameof(Details), new { id = m.ProductId });
 			}
 			return View(menu);
 		}

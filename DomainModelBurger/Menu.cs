@@ -6,7 +6,7 @@ namespace DomainModelBurger
 	[Table("Menu")]
 	public class Menu : Product
 	{
-		[Required(ErrorMessage = "Burger is required")]
+	//	[Required(ErrorMessage = "Burger is required")]
 		public virtual Burger Burger { get; set; }
 
 		public virtual Beverage Beverage { get; set; }
