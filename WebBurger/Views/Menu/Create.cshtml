@@ -1,4 +1,4 @@
-﻿@model WebBurger.Models.MenuViewModel
+﻿@model DomainModelBurger.Menu
 @inject WebBurger.Services.MenuService Menu
 
 @{
@@ -14,60 +14,60 @@
         <form asp-action="Create">
             <div asp-validation-summary="All" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Menu.Name" class="control-label"></label>
-                <input asp-for="Menu.Name" class="form-control" />
-                <span asp-validation-for="Menu.Name" class="text-danger"></span>
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Menu.Price" class="control-label"></label>
-                <input asp-for="Menu.Price" class="form-control" />
-                <span asp-validation-for="Menu.Price" class="text-danger"></span>
+                <label asp-for="Price" class="control-label"></label>
+                <input asp-for="Price" class="form-control" />
+                <span asp-validation-for="Price" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Menu.Description" class="control-label"></label>
-                <textarea asp-for="Menu.Description" class="form-control"></textarea>
-                <span asp-validation-for="Menu.Description" class="text-danger"></span>
+                <label asp-for="Description" class="control-label"></label>
+                <textarea asp-for="Description" class="form-control"></textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Menu.StockPiled" class="control-label"></label>
-                <input asp-for="Menu.StockPiled" class="form-control" />
-                <span asp-validation-for="Menu.StockPiled" class="text-danger"></span>
+                <label asp-for="StockPiled" class="control-label"></label>
+                <input asp-for="StockPiled" class="form-control" />
+                <span asp-validation-for="StockPiled" class="text-danger"></span>
             </div>
 
             <div class="form-group">
-                <label asp-for="Menu.Burger" class="control-label"></label>
-                <select asp-for="Menu.Burger.ProductId" class="form-control"
+                <label asp-for="BurgerProductId" class="control-label"></label>
+                <select asp-for="BurgerProductId" class="form-control"
                         asp-items="@(new SelectList(Menu.GetBurgersAsync(), "Key", "Value"))">
                     <option>Please select one</option>
                 </select>
-                <span asp-validation-for="Menu.Burger" class="text-danger"></span>
+                <span asp-validation-for="BurgerProductId" class="text-danger"></span>
             </div>
 
             <div class="form-group">
-                <label asp-for="Menu.Beverage" class="control-label"></label>
-                <select asp-for="Menu.Beverage.ProductId" class="form-control"
+                <label asp-for="BeverageProductId" class="control-label"></label>
+                <select asp-for="BeverageProductId" class="form-control"
                         asp-items="@(new SelectList(Menu.GetBeveragesAsync(), "Key", "Value"))">
                     <option>Please select one</option>
                 </select>
-                <span asp-validation-for="Menu.Beverage" class="text-danger"></span>
+                <span asp-validation-for="BeverageProductId" class="text-danger"></span>
             </div>
 
             <div class="form-group">
-                <label asp-for="Menu.Side" class="control-label"></label>
-                <select asp-for="Menu.Side.ProductId" class="form-control"
+                <label asp-for="SideProductId" class="control-label"></label>
+                <select asp-for="SideProductId" class="form-control"
                         asp-items="@(new SelectList(Menu.GetSidesAsync(), "Key", "Value"))">
                     <option>Please select one</option>
                 </select>
-                <span asp-validation-for="Menu.Side" class="text-danger"></span>
+                <span asp-validation-for="SideProductId" class="text-danger"></span>
             </div>
 
             <div class="form-group">
-                <label asp-for="Menu.Dessert" class="control-label"></label>
-                <select asp-for="Menu.Dessert.ProductId" class="form-control"
+                <label asp-for="DessertProductId" class="control-label"></label>
+                <select asp-for="DessertProductId" class="form-control"
                         asp-items="@(new SelectList(Menu.GetDessertsAsync(), "Key", "Value"))">
-                    <option>Please select one</option>
+                    <option value="">Please select one</option>
                 </select>
-                <span asp-validation-for="Menu.Dessert" class="text-danger"></span>
+                <span asp-validation-for="DessertProductId" class="text-danger"></span>
             </div>
 
             <div class="form-group">

@@ -37,15 +37,11 @@ namespace WebBurger.Controllers
 		public async Task<IActionResult> Details(int? id)
 		{
 			if (id == null)
-			{
 				return BadRequest();
-			}
 
 			var menu = await repository.GetMenuAsync(id.Value);
 			if (menu == null)
-			{
 				return NotFound();
-			}
 
 			return View(menu);
 		}
@@ -61,15 +57,17 @@ namespace WebBurger.Controllers
 		// For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public async Task<IActionResult> Create([Bind("Name,Price,Description,StockPiled,Burger")] Menu menu)
+		public async Task<IActionResult> Create(
+			[Bind("Name,Price,Description,StockPiled,BurgerProductId,BeverageProductId,SideProductId,DessertProductId")] Menu menu)
 		{
-			ViewData.Model = menu;
+
 			if (ModelState.IsValid)
 			{
-				menu.Beverage = beverageRepository.GetBeverage(menu.Beverage.ProductId);
-				menu.Side = await sideRepository.GetSideAsync(menu.Side.ProductId);
-				menu.Dessert = await dessertRepository.GetDessertAsync(menu.Dessert.ProductId);
-				menu.Burger = await burgerRepository.GetBurger(menu.Burger.ProductId);
+				menu.Beverage = beverageRepository.GetBeverage(menu.BeverageProductId);
+				menu.Side = await sideRepository.GetSideAsync(menu.SideProductId);
+				menu.Burger = await burgerRepository.GetBurger(menu.BurgerProductId);
+				if (menu.DessertProductId != null)
+					menu.Dessert = await dessertRepository.GetDessertAsync(menu.DessertProductId.Value);
 
 				var m = await repository.CreateMenuAsync(menu);
 
@@ -81,16 +79,12 @@ namespace WebBurger.Controllers
 		// GET: Menu/Edit/5
 		public async Task<IActionResult> Edit(int? id)
 		{
-			if (id == null)
-			{
-				return BadRequest();
-			}
+			if (id == null) return BadRequest();
 
 			var menu = await repository.GetMenuAsync(id.Value);
-			if (menu == null)
-			{
-				return NotFound();
-			}
+
+			if (menu == null) return NotFound();
+
 			return View(menu);
 		}
 
@@ -99,17 +93,23 @@ namespace WebBurger.Controllers
 		// For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public async Task<IActionResult> Edit(int id, Menu menu)
+		public async Task<IActionResult> Edit(int id,
+			[Bind("ProductId,Name,Price,Description,StockPiled,BurgerProductId,BeverageProductId,SideProductId,DessertProductId")] Menu menu)
 		{
 			if (id != menu.ProductId)
-			{
 				return NotFound();
-			}
 
 			if (ModelState.IsValid)
 			{
+				menu.Beverage = beverageRepository.GetBeverage(menu.BeverageProductId);
+				menu.Side = await sideRepository.GetSideAsync(menu.SideProductId);
+				menu.Burger = await burgerRepository.GetBurger(menu.BurgerProductId);
+				if (menu.DessertProductId != null)
+					menu.Dessert = await dessertRepository.GetDessertAsync(menu.DessertProductId.Value);
+
 				var m = await repository.EditMenuAsync(id, menu);
-				return RedirectToAction(nameof(Details), m.ProductId);
+
+				return RedirectToAction(nameof(Details), new { id });
 			}
 			return View(menu);
 		}
@@ -118,15 +118,11 @@ namespace WebBurger.Controllers
 		public async Task<IActionResult> Delete(int? id)
 		{
 			if (id == null)
-			{
 				return BadRequest();
-			}
 
 			var menu = await repository.GetMenuAsync(id.Value);
 			if (menu == null)
-			{
 				return NotFound();
-			}
 
 			return View(menu);
 		}
