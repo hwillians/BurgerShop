@@ -32,12 +32,11 @@ namespace WebBurger
 
 			services.AddTransient<MenuService>();
 
-			//services.AddScoped<SchoolContext>();
-
 			services.AddDbContext<BurgerContext>(options =>
 				options.UseSqlServer(Configuration.GetConnectionString("BurgerDb"))
-			);
-			services.AddControllersWithViews();
+				);
+
+			//services.AddControllersWithViews();
 			services.AddControllersWithViews(conf =>
 			{
 				conf.ModelBinderProviders[4] = new FloatingTypeModelBinderProvider();
