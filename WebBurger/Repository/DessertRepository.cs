@@ -15,29 +15,42 @@ namespace WebBurger.Repository
 			this.context = context;
 		}
 
-		public Task<Dessert> CreateDessertAsync(Dessert dessert)
+		public async Task<Dessert> CreateDessertAsync(Dessert dessert)
 		{
-			throw new System.NotImplementedException();
+			context.Desserts.Add(dessert);
+			await context.SaveChangesAsync();
+			return dessert;
 		}
 
-		public Task DeleteDessertAsync(int id)
+		public async Task DeleteDessertAsync(int id)
 		{
-			throw new System.NotImplementedException();
+			var dessert = await context.Desserts.FindAsync(id);
+			context.Desserts.Remove(dessert);
+			context.SaveChanges();
 		}
 
-		public Task<Dessert> EditDessertAsync(int id, Dessert dessert)
+		public async Task<Dessert> EditDessertAsync(int id, Dessert editedDessert)
 		{
-			throw new System.NotImplementedException();
+			var dessert = context.Desserts.Find(id);
+			dessert.Name = editedDessert.Name;
+			dessert.Price = editedDessert.Price;
+			dessert.Description = editedDessert.Description;
+			dessert.StockPiled = editedDessert.StockPiled;
+			dessert.Millimeter = editedDessert.Millimeter;
+			dessert.IsFrozen = editedDessert.IsFrozen;
+			await context.SaveChangesAsync();
+
+			return context.Desserts.Find(id);
 		}
 
-		public Task<Dessert> GetDessertAsync(int id)
+		public async Task<Dessert> GetDessertAsync(int id)
 		{
-			throw new System.NotImplementedException();
+			return await context.Desserts.FindAsync(id);
 		}
 
 		public IQueryable<Dessert> GetDesserts()
 		{
-			return this.context.Desserts;
+			return context.Desserts;
 		}
 	}
 }
