@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebBurger", "WebBurger\WebB
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CommonAttribute", "CommonAttribute\CommonAttribute.csproj", "{14C6D629-70CD-469F-8990-AA2E46237E53}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAPIBurger", "WebAPIBurger\WebAPIBurger.csproj", "{EA44FAAE-A937-4C71-8ABC-E3AD47BFC4C6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{14C6D629-70CD-469F-8990-AA2E46237E53}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{14C6D629-70CD-469F-8990-AA2E46237E53}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{14C6D629-70CD-469F-8990-AA2E46237E53}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EA44FAAE-A937-4C71-8ABC-E3AD47BFC4C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EA44FAAE-A937-4C71-8ABC-E3AD47BFC4C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EA44FAAE-A937-4C71-8ABC-E3AD47BFC4C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EA44FAAE-A937-4C71-8ABC-E3AD47BFC4C6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
