@@ -15,24 +15,37 @@ namespace WebBurger.Repository
 			this.context = context;
 		}
 
-		public Task<Side> CreateSideAsync(Side side)
+		public async Task<Side> CreateSideAsync(Side side)
 		{
-			throw new System.NotImplementedException();
+			context.Sides.Add(side);
+			await context.SaveChangesAsync();
+			return side;
 		}
 
-		public Task DeleteSideAsync(int id)
+		public async  Task DeleteSideAsync(int id)
 		{
-			throw new System.NotImplementedException();
+			var side = await context.Sides.FindAsync(id);
+			context.Sides.Remove(side);
+			context.SaveChanges();
 		}
 
-		public Task<Side> EditSideAsync(int id, Side side)
+		public async Task<Side> EditSideAsync(int id, Side editedSide)
 		{
-			throw new System.NotImplementedException();
+			var side = context.Sides.Find(id);
+			side.Name = editedSide.Name;
+			side.Price = editedSide.Price;
+			side.Description = editedSide.Description;
+			side.StockPiled = editedSide.StockPiled;
+			side.Weight = editedSide.Weight;
+			side.SaltWeight = editedSide.SaltWeight;
+			await context.SaveChangesAsync();
+
+			return context.Sides.Find(id);
 		}
 
-		public Task<Side> GetSideAsync(int id)
+		public async Task<Side> GetSideAsync(int id)
 		{
-			throw new System.NotImplementedException();
+			return await context.Sides.FindAsync(id);
 		}
 
 		public IQueryable<Side> GetSides()
