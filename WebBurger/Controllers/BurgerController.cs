@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
-using WebBurger.Repository;
 using WebBurger.Repository.Contracts;
 
 namespace WebBurger.Controllers
@@ -19,8 +18,7 @@ namespace WebBurger.Controllers
 		// GET: BurgerController
 		public async Task<IActionResult> Index()
 		{
-			var burgers = await repository.GetBurgers().ToListAsync();
-			return View(burgers);
+			return View(await repository.GetBurgers().ToListAsync());
 		}
 
 		// GET: BurgerController/Details/5
@@ -30,6 +28,7 @@ namespace WebBurger.Controllers
 				return BadRequest();
 
 			var burger = await repository.GetBurger(id.Value);
+
 			if (burger == null)
 				return NotFound();
 

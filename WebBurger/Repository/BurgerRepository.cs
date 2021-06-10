@@ -77,7 +77,7 @@ namespace WebBurger.Repository
 
 		public IQueryable<Burger> GetBurgers()
 		{
-			return this.context.Burgers;
+			return context.Burgers;
 		}
 	}
 }
