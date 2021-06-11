@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Dal;
 using DomainModelBurger;
@@ -34,6 +35,8 @@ namespace WebAPIBurger.Controllers
         {
             var dessert = await _context.Desserts.FindAsync(id);
 
+            var dessert = await _context.Desserts
+                .FirstOrDefaultAsync(m => m.ProductId == id);
             if (dessert == null)
             {
                 return NotFound();
@@ -50,39 +53,64 @@ namespace WebAPIBurger.Controllers
             if (id != dessert.ProductId)
             {
                 return BadRequest();
-            }
+        }
 
             _context.Entry(dessert).State = EntityState.Modified;
 
-            try
+            var dessert = await _context.Desserts.FindAsync(id);
+            if (dessert == null)
             {
-                await _context.SaveChangesAsync();
+                return NotFound();
             }
-            catch (DbUpdateConcurrencyException)
+            return View(dessert);
+        }
+
+        // POST: Desserts/Edit/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, [Bind("Millimeter,IsFrozen,ProductId,Name,Price,Description,StockPiled")] Dessert dessert)
+        {
+            if (id != dessert.ProductId)
             {
-                if (!DessertExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                return NotFound();
             }
 
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _context.Update(dessert);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                if (!DessertExists(id))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+
             return NoContent();
+            }
+            return View(dessert);
         }
 
         // POST: api/Desserts
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         public async Task<ActionResult<Dessert>> PostDessert(Dessert dessert)
-        {
+            {
             _context.Desserts.Add(dessert);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetDessert", new { id = dessert.ProductId }, dessert);
-        }
+            }
 
         // DELETE: api/Desserts/5
         [HttpDelete("{id}")]
@@ -94,6 +122,15 @@ namespace WebAPIBurger.Controllers
                 return NotFound();
             }
 
+            return View(dessert);
+        }
+
+        // POST: Desserts/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            var dessert = await _context.Desserts.FindAsync(id);
             _context.Desserts.Remove(dessert);
             await _context.SaveChangesAsync();
 

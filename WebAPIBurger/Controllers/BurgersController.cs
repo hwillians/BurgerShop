@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Dal;
 using DomainModelBurger;
@@ -34,6 +35,8 @@ namespace WebAPIBurger.Controllers
         {
             var burger = await _context.Burgers.FindAsync(id);
 
+            var burger = await _context.Burgers
+                .FirstOrDefaultAsync(m => m.ProductId == id);
             if (burger == null)
             {
                 return NotFound();
@@ -50,39 +53,64 @@ namespace WebAPIBurger.Controllers
             if (id != burger.ProductId)
             {
                 return BadRequest();
-            }
+        }
 
             _context.Entry(burger).State = EntityState.Modified;
 
-            try
+            var burger = await _context.Burgers.FindAsync(id);
+            if (burger == null)
             {
-                await _context.SaveChangesAsync();
+                return NotFound();
             }
-            catch (DbUpdateConcurrencyException)
+            return View(burger);
+        }
+
+        // POST: Burgers/Edit/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, [Bind("Weight,BeefWeight,ProductId,Name,Price,Description,StockPiled")] Burger burger)
+        {
+            if (id != burger.ProductId)
             {
-                if (!BurgerExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                return NotFound();
             }
 
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _context.Update(burger);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                if (!BurgerExists(id))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+
             return NoContent();
+            }
+            return View(burger);
         }
 
         // POST: api/Burgers
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         public async Task<ActionResult<Burger>> PostBurger(Burger burger)
-        {
+            {
             _context.Burgers.Add(burger);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetBurger", new { id = burger.ProductId }, burger);
-        }
+            }
 
         // DELETE: api/Burgers/5
         [HttpDelete("{id}")]
@@ -94,6 +122,15 @@ namespace WebAPIBurger.Controllers
                 return NotFound();
             }
 
+            return View(burger);
+        }
+
+        // POST: Burgers/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            var burger = await _context.Burgers.FindAsync(id);
             _context.Burgers.Remove(burger);
             await _context.SaveChangesAsync();
 
