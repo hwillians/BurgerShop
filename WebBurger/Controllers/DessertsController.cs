@@ -1,8 +1,6 @@
-﻿using Dal;
-using DomainModelBurger;
+﻿using DomainModelBurger;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System.Linq;
 using System.Threading.Tasks;
 using WebBurger.Repository.Contracts;
 
@@ -29,7 +27,6 @@ namespace WebBurger.Controllers
 			if (id == null)
 				return BadRequest();
 
-
 			var dessert = await repository.GetDessertAsync(id.Value);
 
 			if (dessert == null)
@@ -55,7 +52,6 @@ namespace WebBurger.Controllers
 			{
 				var d = await repository.CreateDessertAsync(dessert);
 				return RedirectToAction(nameof(Details), new { id = d.ProductId });
-
 			}
 			return View(dessert);
 		}
@@ -103,7 +99,6 @@ namespace WebBurger.Controllers
 					}
 				}
 				return RedirectToAction(nameof(Details), new { id });
-
 			}
 			return View(dessert);
 		}

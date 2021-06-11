@@ -22,7 +22,7 @@ namespace WebBurger.Repository
 			return side;
 		}
 
-		public async  Task DeleteSideAsync(int id)
+		public async Task DeleteSideAsync(int id)
 		{
 			var side = await context.Sides.FindAsync(id);
 			context.Sides.Remove(side);

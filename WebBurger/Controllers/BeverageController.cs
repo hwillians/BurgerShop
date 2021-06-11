@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
-using WebBurger.Repository;
 using WebBurger.Repository.Contracts;
 
 namespace WebBurger.Controllers

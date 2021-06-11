@@ -60,7 +60,6 @@ namespace WebBurger.Controllers
 		public async Task<IActionResult> Create(
 			[Bind("Name,Price,Description,StockPiled,BurgerProductId,BeverageProductId,SideProductId,DessertProductId")] Menu menu)
 		{
-
 			if (ModelState.IsValid)
 			{
 				menu.Beverage = beverageRepository.GetBeverage(menu.BeverageProductId);

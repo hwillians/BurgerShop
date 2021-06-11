@@ -2,7 +2,6 @@
 using Microsoft.Extensions.Logging;
 using System.Diagnostics;
 using WebBurger.Models;
-using WebBurger.Repository;
 using WebBurger.Repository.Contracts;
 
 namespace WebBurger.Controllers

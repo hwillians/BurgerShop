@@ -80,7 +80,6 @@ namespace WebBurger.Controllers
 			if (id != side.ProductId)
 				return BadRequest();
 
-
 			if (ModelState.IsValid)
 			{
 				try
@@ -91,13 +90,10 @@ namespace WebBurger.Controllers
 				{
 					if (!await SideExistsAsync(side.ProductId))
 						return NotFound();
-
 					else
 						throw;
-
 				}
 				return RedirectToAction(nameof(Details), new { id });
-
 			}
 			return View(side);
 		}

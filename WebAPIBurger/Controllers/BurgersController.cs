@@ -9,98 +9,98 @@ using System.Threading.Tasks;
 namespace WebAPIBurger.Controllers
 {
 	[Route("api/[controller]")]
-    [ApiController]
-    public class BurgersController : ControllerBase
-    {
-        private readonly BurgerContext _context;
+	[ApiController]
+	public class BurgersController : ControllerBase
+	{
+		private readonly BurgerContext _context;
 
-        public BurgersController(BurgerContext context)
-        {
-            _context = context;
-        }
+		public BurgersController(BurgerContext context)
+		{
+			_context = context;
+		}
 
-        // GET: api/Burgers
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Burger>>> GetBurgers()
-        {
-            return await _context.Burgers.ToListAsync();
-        }
+		// GET: api/Burgers
+		[HttpGet]
+		public async Task<ActionResult<IEnumerable<Burger>>> GetBurgers()
+		{
+			return await _context.Burgers.ToListAsync();
+		}
 
-        // GET: api/Burgers/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Burger>> GetBurger(int id)
-        {
-            var burger = await _context.Burgers.FindAsync(id);
+		// GET: api/Burgers/5
+		[HttpGet("{id}")]
+		public async Task<ActionResult<Burger>> GetBurger(int id)
+		{
+			var burger = await _context.Burgers.FindAsync(id);
 
-            if (burger == null)
-            {
-                return NotFound();
-            }
+			if (burger == null)
+			{
+				return NotFound();
+			}
 
-            return burger;
-        }
+			return burger;
+		}
 
-        // PUT: api/Burgers/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutBurger(int id, Burger burger)
-        {
-            if (id != burger.ProductId)
-            {
-                return BadRequest();
-            }
+		// PUT: api/Burgers/5
+		// To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+		[HttpPut("{id}")]
+		public async Task<IActionResult> PutBurger(int id, Burger burger)
+		{
+			if (id != burger.ProductId)
+			{
+				return BadRequest();
+			}
 
-            _context.Entry(burger).State = EntityState.Modified;
+			_context.Entry(burger).State = EntityState.Modified;
 
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!BurgerExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+			try
+			{
+				await _context.SaveChangesAsync();
+			}
+			catch (DbUpdateConcurrencyException)
+			{
+				if (!BurgerExists(id))
+				{
+					return NotFound();
+				}
+				else
+				{
+					throw;
+				}
+			}
 
-            return NoContent();
-        }
+			return NoContent();
+		}
 
-        // POST: api/Burgers
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
-        public async Task<ActionResult<Burger>> PostBurger(Burger burger)
-        {
-            _context.Burgers.Add(burger);
-            await _context.SaveChangesAsync();
+		// POST: api/Burgers
+		// To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+		[HttpPost]
+		public async Task<ActionResult<Burger>> PostBurger(Burger burger)
+		{
+			_context.Burgers.Add(burger);
+			await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetBurger", new { id = burger.ProductId }, burger);
-        }
+			return CreatedAtAction("GetBurger", new { id = burger.ProductId }, burger);
+		}
 
-        // DELETE: api/Burgers/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteBurger(int id)
-        {
-            var burger = await _context.Burgers.FindAsync(id);
-            if (burger == null)
-            {
-                return NotFound();
-            }
+		// DELETE: api/Burgers/5
+		[HttpDelete("{id}")]
+		public async Task<IActionResult> DeleteBurger(int id)
+		{
+			var burger = await _context.Burgers.FindAsync(id);
+			if (burger == null)
+			{
+				return NotFound();
+			}
 
-            _context.Burgers.Remove(burger);
-            await _context.SaveChangesAsync();
+			_context.Burgers.Remove(burger);
+			await _context.SaveChangesAsync();
 
-            return NoContent();
-        }
+			return NoContent();
+		}
 
-        private bool BurgerExists(int id)
-        {
-            return _context.Burgers.Any(e => e.ProductId == id);
-        }
-    }
+		private bool BurgerExists(int id)
+		{
+			return _context.Burgers.Any(e => e.ProductId == id);
+		}
+	}
 }
