@@ -1,6 +1,7 @@
 ﻿using DomainModelBurger;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Threading.Tasks;
 using WebBurger.Repository.Contracts;
 
@@ -58,15 +59,25 @@ namespace WebBurger.Controllers
 		[HttpPost]
 		[ValidateAntiForgeryToken]
 		public async Task<IActionResult> Create(
-			[Bind("Name,Price,Description,StockPiled,BurgerProductId,BeverageProductId,SideProductId,DessertProductId")] Menu menu)
+			[Bind("Name,Price,Description,BurgerProductId,BeverageProductId,SideProductId,DessertProductId")] Menu menu)
 		{
 			if (ModelState.IsValid)
 			{
-				menu.Beverage = beverageRepository.GetBeverage(menu.BeverageProductId);
-				menu.Side = await sideRepository.GetSideAsync(menu.SideProductId);
-				menu.Burger = await burgerRepository.GetBurger(menu.BurgerProductId);
+				Burger burger = await burgerRepository.GetBurger(menu.BurgerProductId);
+				Beverage beverage = beverageRepository.GetBeverage(menu.BeverageProductId);
+				Side side = await sideRepository.GetSideAsync(menu.SideProductId);
+
+				menu.Beverage = beverage;
+				menu.Side = side;
+				menu.Burger = burger;
+				menu.StockPiled = Math.Min(side.StockPiled, Math.Min(burger.StockPiled, beverage.StockPiled));
+
 				if (menu.DessertProductId != null)
-					menu.Dessert = await dessertRepository.GetDessertAsync(menu.DessertProductId.Value);
+				{
+					Dessert dessert = await dessertRepository.GetDessertAsync(menu.DessertProductId.Value);
+					menu.Dessert = dessert;
+					menu.StockPiled = dessert.StockPiled < menu.StockPiled ? dessert.StockPiled : menu.StockPiled;
+				}
 
 				var m = await repository.CreateMenuAsync(menu);
 

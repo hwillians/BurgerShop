@@ -27,6 +27,6 @@ namespace DomainModelBurger
 		[Required]
 		[PositiveNumber]
 		[DisplayName("Stock piled")]
-		public int StockPiled { get; set; }
+		public int StockPiled { get; set; } = 0;
 	}
 }

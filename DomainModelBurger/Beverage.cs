@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DomainModelBurger
 {
-	[Table("Beverage")]
+	[Table("Beverages")]
 	public class Beverage : Product
 	{
 		[Required]

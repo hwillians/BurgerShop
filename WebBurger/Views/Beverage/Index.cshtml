@@ -1,50 +1,49 @@
 ﻿@model IEnumerable<DomainModelBurger.Beverage>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Beverages";
 }
 
-<h1>Index</h1>
+<h1>Beverages</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
+<a asp-action="Create" class="btn btn-primary float-right m-1">New Beverage</a>
+
+<table class="table  table-striped">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Millimeter)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IsCarbonated)
-            </th>
-            <th>
+            <th scope="col">
                 @Html.DisplayNameFor(model => model.Name)
             </th>
-            <th>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.IsCarbonated)
+            </th>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.Millimeter)
+            </th>
+            <th scope="col">
                 @Html.DisplayNameFor(model => model.Price)
             </th>
-            <th>
+            <th scope="col">
                 @Html.DisplayNameFor(model => model.Description)
             </th>
-            <th>
+            <th scope="col">
                 @Html.DisplayNameFor(model => model.StockPiled)
             </th>
-            <th></th>
+            <th scope="col"></th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Millimeter)
-                </td>
+                <th scope="row">
+                    @Html.DisplayFor(modelItem => item.Name)
+                </th>
                 <td>
                     @Html.DisplayFor(modelItem => item.IsCarbonated)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Name)
+                    @Html.DisplayFor(modelItem => item.Millimeter)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Price)
@@ -56,9 +55,11 @@
                     @Html.DisplayFor(modelItem => item.StockPiled)
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.ProductId }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.ProductId }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.ProductId })
+                    <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                        <a asp-action="Edit" asp-route-id="@item.ProductId" class="btn btn-primary">Edit</a>
+                        <a asp-action="Details" asp-route-id="@item.ProductId" class="btn btn-info">Details</a>
+                        <a asp-action="Delete" asp-route-id="@item.ProductId" class="btn btn-danger">Delete</a>
+                    </div>
                 </td>
             </tr>
         }

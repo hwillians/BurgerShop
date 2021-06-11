@@ -13,6 +13,11 @@
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <label asp-for="Millimeter" class="control-label"></label>
                 <input asp-for="Millimeter" type="number" class="form-control" />
                 <span asp-validation-for="Millimeter" class="text-danger"></span>
@@ -21,11 +26,6 @@
                 <label class="form-check-label">
                     <input class="form-check-input" asp-for="IsCarbonated" /> @Html.DisplayNameFor(model => model.IsCarbonated)
                 </label>
-            </div>
-            <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Price" class="control-label"></label>

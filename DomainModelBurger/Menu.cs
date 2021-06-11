@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DomainModelBurger
 {
-	[Table("Menu")]
+	[Table("Menus")]
 	public class Menu : Product
 	{
 		public virtual Burger Burger { get; set; }

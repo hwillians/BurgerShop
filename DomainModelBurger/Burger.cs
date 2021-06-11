@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DomainModelBurger
 {
-	[Table("Burger")]
+	[Table("Burgers")]
 	public class Burger : Product
 	{
 		[Required]
