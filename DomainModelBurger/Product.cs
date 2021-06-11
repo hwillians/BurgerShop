@@ -2,6 +2,7 @@
 using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DomainModelBurger
 {
@@ -14,7 +15,8 @@ namespace DomainModelBurger
 		public string Name { get; set; }
 
 		[Required]
-		[Range(0, 200)]
+		[Range(0, 99.99)]
+		[Column(TypeName = "decimal(4,2)")]
 		public decimal Price { get; set; }
 
 		[Required]
